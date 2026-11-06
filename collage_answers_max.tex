@@ -1,0 +1,16 @@
+\documentclass[a4paper, landscape]{article}
+\usepackage{pdfpages}
+
+
+\begin{document}
+	% nup=2x2 — 2 столбца, 2 строки (4 страницы на лист)
+	% delta=5mm 5mm — промежутки между страницами
+	% frame=true — рамка вокруг каждой страницы (удобно для резки)
+	\includepdf[
+	pages=3-last,
+	nup=6x4,
+	delta=0mm 0mm,
+	frame=true,
+	scale=0.97
+	]{answers_max.pdf}
+\end{document}

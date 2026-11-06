@@ -1,0 +1,775 @@
+\documentclass[8pt]{extarticle}
+
+\usepackage{diplomstyle}
+
+\geometry{
+	a4paper,
+	paperheight=140mm,
+	paperwidth=140mm,
+	left=0.5cm,
+	right=0.5cm,
+	top=0.5cm,
+	bottom=0.5cm,
+	footskip=0.8cm
+}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ragged2e}
+\usepackage{longtable}
+\usepackage{esint}
+\usepackage{tikz}
+\usetikzlibrary{patterns,arrows.meta,shapes.geometric}
+\usepackage{circuitikz}
+\usepackage{cancel}
+\usepackage{draftwatermark}
+
+\DeclareMathOperator{\re}{\operatorname{Re}}
+\DeclareMathOperator{\im}{\operatorname{Im}}
+\DeclareMathOperator{\Epsilon}{\mathcal{E}}
+\DeclareMathOperator{\Div}{\operatorname{div}}
+\DeclareMathOperator{\Rot}{\operatorname{rot}}
+\DeclareMathOperator{\Grad}{\operatorname{grad}}
+\DeclareMathOperator{\R}{\mathbb{R}}
+
+\makeatletter
+\newcommand\incircbin{\mathpalette\@incircbin}
+\newcommand\@incircbin[2]{%
+	\mathbin{\ooalign{\hidewidth$#1#2$\hidewidth\crcr$#1\bigcirc$}}%
+}
+\makeatother
+
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dd}[2]{\frac{d {#1}}{d {#2}}}
+\newcommand{\ppp}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\ddd}[2]{$\frac{d^2 {#1}}{d {#2}^2}$}
+
+\renewcommand{\theadfont}{\normalsize}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\title{Ответы на вопросы \\ <<Теория информации и кодирования>>}
+\author{Скороходов С.А., 438Б группа}
+\date{ }
+
+\SetWatermarkText{\textbf{SerKin0}}
+\SetWatermarkColor[gray]{0.95}
+\SetWatermarkScale{1}
+
+\def\tquastion#1{\newpage\addcontentsline{toc}{subsection}{#1}\begin{librarybox}#1 \end{librarybox}}
+
+\begin{document}
+	\emergencystretch=3em
+	\sloppy
+	\setlength{\abovedisplayskip}{3pt}
+	\setlength{\belowdisplayskip}{3pt}
+	\setlength{\abovedisplayshortskip}{3pt}
+	\setlength{\belowdisplayshortskip}{3pt}
+	\maketitle
+	Ответы на вопросы составлены преимущественно по учебно-методическим материалам А.А. Мальцева и соавторов. Студенческие конспекты использованы как дополнительные материалы для сверки. Формулы из источников сохранены в исходной записи и обозначениях; рамкой отмечены основные соотношения.
+	
+	\medskip
+	\noindent\textit{Обозначения по методичке:} $j^2=-1$; $W$ --- плотность вероятности; $\langle\cdot\rangle$ --- усреднение по статистическому ансамблю; $K_x$ --- корреляционная (нецентрированная) функция; $B_x$ --- ковариационная (центрированная) функция; $\delta$ --- дельта-функция Дирака.
+	
+	\tableofcontents
+	
+	\addcontentsline{toc}{subsection}{Источники}
+	\begin{thebibliography}{3}
+		\bibitem{maltsev} Мальцев А.А., Артюхин И.В., Болховская О.В., Домбровский Е.А., Клюев А.В., Флаксман А.Г. \textit{Основы теории случайных процессов для радиофизиков: учебно-методические материалы для магистров и аспирантов}. Нижний Новгород: Нижегородский государственный университет им. Н.И. Лобачевского, 2014. 78 с.
+		\bibitem{stat} \textit{Статистическая радиофизика (конспект)}. Предоставленный студенческий конспект в формате Markdown.
+		\bibitem{minimum} \textit{Программа-минимум «Статистическая радиофизика»}. Предоставленный студенческий конспект в формате Markdown.
+	\end{thebibliography}
+	
+	\tquastion{1. Определение случайного процесса. Вероятностное описание ансамбля. Многомерные плотности вероятности, их свойства.}
+	
+	\textbf{Случайный процесс} $x(t)$ --- однопараметрическое семейство случайных величин: для каждого фиксированного $t$ значение $x(t)$ является случайной величиной. Эквивалентно, случайный процесс --- множество детерминированных функций (реализаций, траекторий), на котором задана вероятностная мера. Все реализации и вероятности их появления образуют \textbf{статистический ансамбль}.
+	
+	Вероятностное описание процесса задаётся конечномерными плотностями вероятности. Для моментов $t_1,\ldots,t_n$ вводится $n$-мерная плотность:
+	\[
+	\boxed{W(x_1, t_1; x_2, t_2; \dots; x_n, t_n)\,dx_1\,dx_2\dots dx_n
+		=P\{x_i\leq x(t_i)<x_i+dx_i;\ i=1,2,\dots,n\}.}
+	\]
+	Процесс считается заданным, если известны его $n$-мерные плотности для любого $n$ и произвольных $t_1,\ldots,t_n$.
+	
+	\textbf{Свойства $n$-мерной плотности вероятности:}
+	\begin{enumerate}
+		\item \textbf{Неотрицательность:}
+		\[
+		\boxed{W(x_1,t_1;x_2,t_2;\ldots;x_n,t_n)\geq 0.}
+		\]
+		\item \textbf{Нормировка:}
+		\[
+		\boxed{\int_{-\infty}^{\infty}\dots\int_{-\infty}^{\infty}
+			W(x_1,t_1;x_2,t_2;\ldots;x_n,t_n)\,dx_1dx_2\ldots dx_n=1.}
+		\]
+		\item \textbf{Симметрия:}
+		\[
+		\boxed{W(x_1,t_1;x_2,t_2;\ldots;x_n,t_n)
+			=W(x_2,t_2;x_1,t_1;\ldots;x_n,t_n).}
+		\]
+		Плотность симметрична относительно любых перестановок пар $(x_i,t_i)$.
+		\item \textbf{Согласованность:} из плотности большей размерности можно получить плотность меньшей размерности интегрированием по лишним аргументам. При любом $m<n$:
+		\[
+		\boxed{W_m(x_1,t_1;x_2,t_2;\dots;x_m,t_m)=
+			\int\dots\int W_n(x_1,t_1;x_2,t_2;\dots;x_n,t_n)
+			\,dx_{m+1}\,dx_{m+2}\dots dx_n.}
+		\]
+	\end{enumerate}
+	\textit{(Мальцев и др. [1], §§1.1--1.2.)}
+	
+	\tquastion{2. Двумерная условная плотность вероятности, её свойства. Связь с многомерными безусловными плотностями.}
+	
+	Условная плотность $W(x_2,t_2/x_1,t_1)$ --- плотность вероятности значения $x(t_2)$ при условии, что в момент $t_1$ процесс имел значение $x_1$. По определению:
+	\[
+	\boxed{W(x_1, t_1; x_2, t_2) = W(x_1, t_1) \cdot
+		W(x_2, t_2 / x_1, t_1).}\tag{1.3.1}
+	\]
+	Отсюда:
+	\[
+	\boxed{W(x_2, t_2 / x_1, t_1) \equiv
+		\frac{W(x_1, t_1; x_2, t_2)}{W(x_1, t_1)}.}\tag{1.3.2}
+	\]
+	По отношению к переменной $x_2$ условная плотность обладает свойствами обычной плотности вероятности:
+	\[
+	\boxed{W(x_2,t_2/x_1,t_1)\geq 0.}
+	\]
+	\[
+	\boxed{\int_{-\infty}^{\infty}W(x_2,t_2/x_1,t_1)\,dx_2=1.}
+	\]
+	Она не обладает симметрией:
+	\[
+	\boxed{W(x_1,t_1/x_2,t_2)\neq W(x_2,t_2/x_1,t_1).}
+	\]
+	
+	Для произвольного числа моментов времени многомерная плотность представляется через условные плотности:
+	\[
+	\boxed{\begin{aligned}
+			W(x_1, t_1, \dots, x_n, t_n) &= W(x_1, t_1) \cdot
+			W(x_2, t_2/x_1, t_1) \cdot \\
+			&\quad W(x_3, t_3/x_1, t_1, x_2, t_2) \cdot \dots \\
+			&\quad W(x_n, t_n/x_1, t_1, \dots, x_{n-1}, t_{n-1}).
+	\end{aligned}}\tag{1.3.8}
+	\]
+	Физически условная плотность описывает статистический подансамбль реализаций, прошедших вблизи заданного значения $x_1$ в момент $t_1$. \textit{(Мальцев и др. [1], §1.3.)}
+	
+	\tquastion{3. Классификация процессов по вероятностному последействию. Марковские процессы. Уравнение Смолуховского.}
+	
+	По характеру вероятностного последействия в методичке рассматриваются совершенно случайные и марковские процессы. У \textbf{совершенно случайного процесса} значения в любые несовпадающие моменты времени статистически независимы: процесс не обладает вероятностной памятью. Его $n$-мерная плотность:
+	\[
+	\boxed{W(x_1, t_1, \dots, x_n, t_n)=
+		W(x_1,t_1)\dots W(x_n,t_n)=\prod_{i=1}^{n}W(x_i,t_i).}\tag{2.1.1}
+	\]
+	Условная плотность при этом не зависит от предыдущих значений:
+	\[
+	W(x_n,t_n/x_1,t_1,\ldots,x_{n-1},t_{n-1})=W(x_n,t_n).
+	\]
+	
+	\textbf{Марковский процесс} --- процесс без последействия: будущее при известном настоящем не зависит от всех более ранних значений. Для упорядоченных моментов $t_1<t_2<\ldots<t_n$:
+	\[
+	\boxed{W(x_n, t_n / x_1, t_1, \dots, x_{n-1}, t_{n-1})
+		=W(x_n, t_n / x_{n-1}, t_{n-1}).}\tag{2.2.1}
+	\]
+	Поэтому
+	\[
+	\boxed{\begin{aligned}
+			W(x_1, t_1, \dots, x_n, t_n) &= W(x_1, t_1) \cdot W(x_2, t_2 / x_1, t_1) \cdot W(x_3, t_3 / x_2, t_2) \\
+			&\cdots \cdot W(x_n, t_n / x_{n-1}, t_{n-1}) = W(x_1, t_1) \prod_{i=2}^{n} W(x_i, t_i / x_{i-1}, t_{i-1})
+	\end{aligned}}\tag{2.2.2--2.2.3}
+	\]
+	Условные плотности марковского процесса называют \textbf{вероятностями перехода}. Для трёх моментов $t_0<t_1<t$ уравнение Смолуховского имеет вид:
+	\[
+	\boxed{W(x,t/x_0,t_0)=\int_{-\infty}^{+\infty}
+		W(x,t/x_1,t_1)W(x_1,t_1/x_0,t_0)\,dx_1.}\tag{2.2.3}
+	\]
+	Оно выражает согласованность вероятностей перехода через промежуточное состояние; результат не зависит от промежуточного момента $t_1$. Уравнение справедливо для любого марковского процесса. \textit{(Мальцев и др. [1], §§2.1--2.2.)}
+	
+	\tquastion{4. Детерминированные и квазидетерминированные процессы, их описание.}
+	
+	У \textbf{детерминированного процесса} $x(t)=s(t)$ ансамбль состоит из одной реализации. Его $n$-мерная плотность вероятности:
+	\[
+	\boxed{W(x_1, t_1, \dots, x_n, t_n) =
+		\prod_{i=1}^{n}\delta[x_i-s(t_i)].}\tag{2.3.1}
+	\]
+	\textbf{Квазидетерминированным} называется процесс, реализации которого описываются функцией времени заданного вида, содержащей один или несколько случайных параметров. При одном параметре $\lambda$ методичка задаёт условную плотность:
+	\[
+	\boxed{W(x_1, t_1, \dots, x_n, t_n / \lambda) =
+		\prod_{i=1}^{n}\delta[x_i-s(t_i,\lambda)].}\tag{2.3.4}
+	\]
+	Совместная плотность с параметром и итоговая $n$-мерная плотность:
+	\[
+	\boxed{W(x_1,t_1;\dots;x_n,t_n;\lambda)=
+		W_{\lambda}(\lambda)W(x_1,t_1;\dots;x_n,t_n/\lambda),}\tag{2.3.5}
+	\]
+	\[
+	\boxed{W(x_1, t_1; \dots; x_n, t_n) =
+		\int_{-\infty}^{+\infty}W_{\lambda}(\lambda)
+		\prod_{i=1}^{n}\delta[x_i-s(t_i,\lambda)]\,d\lambda.}\tag{2.3.6}
+	\]
+	Таким образом, случайность квазидетерминированного процесса сосредоточена в случайных параметрах, а при их фиксации реализация становится детерминированной. \textit{(Мальцев и др. [1], §2.3.)}
+	
+	\tquastion{5. Квазигармонический процесс со случайной начальной фазой $x(t)=A_0\cos(\omega t+\varphi)$.}
+	
+	В методичке рассматривается гармонический процесс с фиксированными амплитудой и частотой и равномерной начальной фазой:
+	\[
+	\boxed{x(t)=A_0\cos(\omega_0t+\varphi),\qquad
+		W_{\varphi}(\varphi)=\begin{cases}
+			\dfrac{1}{2\pi},&|\varphi|\leq\pi,\\
+			0,&|\varphi|>\pi.
+	\end{cases}}\tag{2.3.3}
+	\]
+	Одномерная плотность вероятности вычисляется по формуле (2.3.7); после подстановки производной (2.3.8) получается:
+	\[
+	\boxed{W(x,t)=W(x)=\begin{cases}
+			\dfrac{1}{\pi\sqrt{A_0^2-x^2}},&|x|<A_0,\\
+			0,&|x|>A_0.
+	\end{cases}}\tag{2.3.9}
+	\]
+	Для стационарности вычисляются среднее и корреляционная функция. Среднее из (5.2.1):
+	\[
+	\boxed{\begin{aligned}
+			\langle x(t) \rangle &= A_0 \langle \cos(\omega_0 t + \varphi) \rangle =
+			A_0 \langle \cos \omega_0 t \cos \varphi - \sin \omega_0 t \sin \varphi \rangle = \\
+			&= A_0 [\cos \omega_0 t \langle \cos \varphi \rangle -
+			\sin \omega_0 t \langle \sin \varphi \rangle].
+	\end{aligned}}\tag{5.2.1}
+	\]
+	При равномерной фазе:
+	\[
+	\boxed{\langle \cos \varphi \rangle =
+		\int_{-\infty}^{\infty}\cos\varphi W_{\varphi}(\varphi)\,d\varphi=
+		\frac{1}{2\pi}\int_{-\pi}^{\pi}\cos\varphi\,d\varphi=0,}\tag{5.2.2}
+	\]
+	\[
+	\boxed{\langle \sin \varphi \rangle =
+		\frac{1}{2\pi}\int_{-\pi}^{\pi}\sin\varphi\,d\varphi=0.}\tag{5.2.3}
+	\]
+	Следовательно, $\langle x(t)\rangle=0$. Корреляционная функция (5.2.4):
+	\[
+	\boxed{\begin{aligned}
+			K_x[t_1, t_2] &= \langle x(t_1)x(t_2)\rangle =
+			\langle A_0^2\cos(\omega_0t_1+\varphi)
+			\cos(\omega_0t_2+\varphi)\rangle = \\
+			&= \langle A_0^2\cos(\omega_0t_1+\varphi)
+			\cos(\omega_0t_1+\omega_0\tau+\varphi)\rangle = \\
+			&= \frac{A_0^2}{2}[\langle\cos(2\omega_0t_1+\omega_0\tau+2\varphi)\rangle+
+			\langle\cos(\omega_0\tau)\rangle] =
+			\frac{A_0^2}{2}\cos(\omega_0\tau).
+	\end{aligned}}\tag{5.2.4}
+	\]
+	Среднее постоянно, а корреляционная функция зависит только от $\tau=t_2-t_1$. В методичке дополнительно указано, что при равномерной фазе конечномерные плотности инвариантны к сдвигу времени: процесс стационарен и в узком смысле. \textit{(Мальцев и др. [1], §§2.3, 5.2.)}
+	
+	\tquastion{6. Многомерная характеристическая функция, её свойства.}
+	\small
+	$n$-мерная характеристическая функция --- $n$-кратное преобразование Фурье от $n$-мерной плотности вероятности; эквивалентно, это ансамблевое среднее:
+	\[
+	\boxed{\Theta_x(u_1, t_1; \dots; u_n, t_n) =
+		\int \dots \int W(x_1, t_1; \dots; x_n, t_n)\cdot
+		e^{j(u_1x_1+\dots+u_nx_n)}\,dx_1\dots dx_n.}\tag{3.1.1}
+	\]
+	\[
+	\boxed{\Theta_x(u_1, t_1; \dots; u_n, t_n) =
+		\left\langle e^{j(u_1x_1+\dots+u_nx_n)}\right\rangle=
+		\left\langle\exp\left[j\sum_{i=1}^{n}u_ix(t_i)\right]\right\rangle.}\tag{3.1.2}
+	\]
+	Обратное преобразование Фурье:
+	\[
+	\boxed{W(x_1, t_1; \dots; x_n, t_n)=
+		\frac{1}{(2\pi)^n}\int\dots\int
+		\Theta_x(u_1,t_1;\dots;u_n,t_n)e^{-j(u_1x_1+\dots+u_nx_n)}\,du_1\dots du_n.}\tag{3.1.3}
+	\]
+	\textbf{Основные свойства:}
+	\begin{enumerate}
+		\setlength{\itemsep}{0pt}
+		\item Нормировка:
+		\[\boxed{\Theta_x(0, t_1; \dots; 0, t_n) =
+			\int \dots \int W(x_1, t_1; \dots; x_n, t_n)\,dx_1 \dots dx_n = 1.}\tag{3.1.4}\]
+		\item Ограниченность по модулю:
+		\[\boxed{|\Theta_x(u_1, t_1; \dots; u_n, t_n)| \leq
+			\Theta_x(0, t_1; \dots; 0, t_n) = 1.}\tag{3.1.5}\]
+		\item Симметрия:
+		\[\boxed{\Theta_x(-u_1, t_1; \dots; -u_n, t_n) =
+			\Theta_x^*(u_1, t_1; \dots; u_n, t_n).}\tag{3.1.6}\]
+		\item Согласованность:
+		\[\boxed{\Theta_x(u_1, t_1; \dots; u_m, t_m) =
+			\Theta_x(u_1, t_1; \dots; u_m, t_m; 0, t_{m+1}; \dots; 0, t_n).}\tag{3.1.7}\]
+		\item Для совершенно случайного процесса:
+		\[\boxed{\Theta_x(u_1, t_1; \dots; u_n, t_n) =
+			\prod_{i=1}^{n} \Theta_x(u_i, t_i).}\tag{3.1.8}\]
+	\end{enumerate}
+	Для марковского процесса достаточно знать двумерную характеристическую функцию. \textit{(Мальцев и др. [1], §3.1.)}
+	\normalsize
+	
+	\tquastion{7. Моментные функции. Среднее значение и корреляционная функция. Связь с характеристической функцией.}
+	
+	\textbf{Моментная функция} $s$-го порядка --- среднее произведение значений процесса в произвольные моменты времени. Первый порядок и корреляционная функция (второй порядок) в методичке определены так:
+	\[
+	\boxed{\alpha_1(t)=m_x(t)=\langle x(t)\rangle=
+		\int_{-\infty}^{+\infty}xW(x,t)\,dx.}\tag{3.2.1}
+	\]
+	\[
+	\boxed{\alpha_2(t_1,t_2)\equiv K_x[t_1,t_2]\equiv
+		\langle x(t_1)x(t_2)\rangle\equiv
+		\iint x_1x_2W(x_1,t_1;x_2,t_2)\,dx_1\,dx_2.}\tag{3.2.2}
+	\]
+	Общая моментная функция:
+	\[
+	\boxed{\begin{aligned}
+			\alpha_s(t_1,t_2,\dots,t_s)&=\langle x(t_1)x(t_2)\dots x(t_s)\rangle\equiv\\
+			&\equiv\int_s\dots\int_s x_1\dots x_s
+			W(x_1,t_1;\dots;x_s,t_s)\,dx_1\dots dx_s.
+	\end{aligned}}\tag{3.2.3}
+	\]
+	Связь с характеристической функцией задаётся производными в нуле:
+	\[
+	\boxed{\left.\frac{\partial^s\Theta_x(u_1,t_1;\dots;u_n,t_n)}
+		{\partial u_{k_1}\partial u_{k_2}\dots\partial u_{k_s}}\right|_{u_1,\dots,u_n=0}
+		=j^s\cdot\langle x(t_{k_1})\cdot\dots\cdot x(t_{k_s})\rangle
+		=j^s\alpha_s(t_{k_1}\dots t_{k_s}).}\tag{3.2.9}
+	\]
+	При совпадении всех времён $\alpha_s(t,\ldots,t)=\langle x^s(t)\rangle$. \textit{(Мальцев и др. [1], §3.2.)}
+	
+	\tquastion{8. Кумулянтные функции, их связь с моментными функциями (1-й и 2-й порядок).}
+	
+	Кумулянтные функции --- коэффициенты разложения логарифма характеристической функции в ряд. Их определение:
+	\[
+	\boxed{\kappa_s(t_{k_1},\dots,t_{k_s})\equiv
+		\frac{1}{j^s}\left.\frac{\partial^s\ln\Theta_x(u_1,t_1;\dots;u_n,t_n)}
+		{\partial u_{k_1}\partial u_{k_2}\cdots\partial u_{k_s}}\right|_{u_1,\dots,u_n=0}.}\tag{3.2.16}
+	\]
+	Первые два порядка:
+	\[
+	\boxed{\kappa_1(t_k)=\alpha_1(t_k)=m_x(t_k).}\tag{3.2.19}
+	\]
+	{\small
+		\[
+		\boxed{\begin{aligned}
+				\kappa_2(t_{k_1},t_{k_2})&=\frac{1}{j^2}\left[
+				\frac{-1}{\Theta_x^2(u_1,t_1;\dots;u_n,t_n)}
+				\frac{\partial\Theta_x}{\partial u_{k_1}}
+				\frac{\partial\Theta_x}{\partial u_{k_2}}+
+				\frac{1}{\Theta_x(u_1,t_1;\dots;u_n,t_n)}
+				\frac{\partial^2\Theta_x}{\partial u_{k_1}\partial u_{k_2}}
+				\right]_{u_1,\dots,u_n=0}=\\
+				&=\alpha_2(t_{k_1},t_{k_2})-
+				\alpha_1(t_{k_1})\alpha_1(t_{k_2})=\\
+				&=\langle x(t_{k_1})x(t_{k_2})\rangle-
+				\langle x(t_{k_1})\rangle\langle x(t_{k_2})\rangle
+				=B_x(t_{k_1},t_{k_2}).
+		\end{aligned}}\tag{3.2.21}
+		\]
+	}
+	Следовательно, первый кумулянт равен среднему, второй --- ковариационной функции. В записи методички также:
+	\[
+	\boxed{\kappa_2(t_1,t_2)=B_x[t_1,t_2]=
+		\langle\widetilde{x}(t_1)\widetilde{x}(t_2)\rangle,}\tag{3.2.22}
+	\]
+	\[
+	\boxed{\kappa_2(t_1,t_2)=K_x[t_1,t_2]-
+		\langle x(t_1)\rangle\langle x(t_2)\rangle.}\tag{3.2.23}
+	\]
+	\textit{(Мальцев и др. [1], §3.2.)}
+	
+	\tquastion{9. Ковариационная функция. Дисперсия. Некоррелированность и статистическая независимость. Коэффициент корреляции.}
+	
+	Ковариационная функция --- второй кумулянт; она равна корреляционной функции минус произведение средних. При $t_1=t_2=t$ она равна дисперсии:
+	\[
+	\boxed{\kappa_2(t_1,t_2)=B_x[t_1,t_2]=
+		\langle\widetilde{x}(t_1)\widetilde{x}(t_2)\rangle.}\tag{3.2.22}
+	\]
+	\[
+	\boxed{\kappa_2(t_1,t_2)=K_x[t_1,t_2]-
+		\langle x(t_1)\rangle\langle x(t_2)\rangle.}\tag{3.2.23}
+	\]
+	\[
+	\boxed{B_x[t,t]=\sigma_x^2(t)=
+		\langle x^2(t)\rangle-\langle x(t)\rangle^2.}
+	\]
+	Значения $x(t_1)$ и $x(t_2)$ некоррелированы, если $B_x[t_1,t_2]=0$ (или $K_x[t_1,t_2]=\langle x(t_1)\rangle\langle x(t_2)\rangle$). Статистическая независимость означает разложение совместной плотности в произведение одномерных; из независимости следует некоррелированность, обратное в общем случае неверно.
+	
+	Коэффициент корреляции (нормированная ковариационная функция):
+	\[
+	\boxed{R_x[t_1,t_2]=
+		\frac{B_x[t_1,t_2]}{\sqrt{B_x[t_1,t_1]B_x[t_2,t_2]}}=
+		\frac{B_x[t_1,t_2]}{\sigma_x(t_1)\sigma_x(t_2)}.}\tag{3.2.25}
+	\]
+	\textit{(Мальцев и др. [1], §3.2.)}
+	
+	\tquastion{10. Гауссовские процессы, их $n$-мерная характеристическая функция и плотность вероятности.}
+	
+	Процесс $x(t)$ называется \textbf{гауссовым}, если его $n$-мерная характеристическая функция имеет следующий вид (эквивалентно: все кумулянтные функции высших порядков, начиная с третьего, равны нулю):
+	\[
+	\boxed{\begin{aligned}
+			\Theta_x(u_1,t_1;\dots;u_n,t_n)&=
+			\exp\left\{j\sum_{k=1}^{n}\kappa_1(t_k)u_k+
+			\frac{j^2}{2}\sum_{k,l=1}^{n}\kappa_2(t_k,t_l)u_ku_l\right\}=\\
+			&=\exp\left\{j\sum_{k=1}^{n}m(t_k)u_k-
+			\frac{1}{2}\sum_{k,l=1}^{n}B[t_k,t_l]u_ku_l\right\}.
+	\end{aligned}}\tag{4.1.3}
+	\]
+	Для плотности вероятности методичка приводит обратное преобразование Фурье и его результат:
+	\[
+	\boxed{\begin{aligned}
+			W(x_1,t_1;x_2,t_2;\dots;x_n,t_n)&=\\
+			&=\frac{1}{(2\pi)^n}\int\dots\int
+			\exp\left[j\vec{m}_x^T\vec{u}-\frac{1}{2}\vec{u}^T\mathbf{B}_x\vec{u}\right]
+			\exp(-j\vec{x}^T\vec{u})\,d\vec{u}=\\
+			&=\frac{1}{\sqrt{(2\pi)^n|\mathbf{B}_x|}}
+			\exp\left[-\frac{1}{2}(\vec{x}-\vec{m}_x)^T
+			\mathbf{B}_x^{-1}(\vec{x}-\vec{m}_x)\right].
+	\end{aligned}}\tag{4.1.11}
+	\]
+	Здесь $|\mathbf{B}_x|$ --- определитель ковариационной матрицы. Формула плотности в таком виде применима при невырожденной матрице; при $|\mathbf{B}_x|=0$ характеристическая функция сохраняет смысл, а запись плотности (4.1.11) неприменима. \textit{(Мальцев и др. [1], §4.1.)}
+	
+	\tquastion{11. Ковариационная матрица отсчётов процесса, её свойства.}
+	
+	Для отсчётов $\vec{x}=\{x(t_1),\ldots,x(t_n)\}$ вводится вектор средних $\vec{m}_x$ и ковариационная матрица:
+	\[
+	\boxed{\mathbf{B}_x =
+		\begin{pmatrix}
+			B_x[t_1,t_1] & B_x[t_1,t_2] & \dots & B_x[t_1,t_n] \\
+			B_x[t_2,t_1] & B_x[t_2,t_2] & \dots & B_x[t_2,t_n] \\
+			\vdots & \vdots & \ddots & \vdots \\
+			B_x[t_n,t_1] & B_x[t_n,t_2] & \dots & B_x[t_n,t_n]
+		\end{pmatrix}=
+		\left\langle[\vec{x}-\vec{m}_x]\cdot[\vec{x}-\vec{m}_x]^T\right\rangle.}\tag{4.1.5}
+	\]
+	Матрица симметрична, поскольку
+	\[
+	\boxed{\begin{aligned}
+			B_x[t_k,t_l]&\equiv\langle x(t_k)x(t_l)\rangle-
+			\langle x(t_k)\rangle\langle x(t_l)\rangle\equiv\\
+			&\equiv\langle x(t_l)x(t_k)\rangle-
+			\langle x(t_l)\rangle\langle x(t_k)\rangle\equiv B_x[t_l,t_k].
+	\end{aligned}}\tag{4.1.7}
+	\]
+	Следовательно, $\mathbf{B}_x^T=\mathbf{B}_x$. Матрица неотрицательно определена:
+	\[
+	\boxed{\vec{u}^{T}\mathbf{B}_x\vec{u}\geq0.}\tag{4.1.8}
+	\]
+	Это следует из
+	\[
+	\boxed{\left\langle[(\vec{x}-\vec{m}_x)^T\vec{u}]^2\right\rangle\geq0.}\tag{4.1.9}
+	\]
+	Корреляционная матрица $\{K[t_k,t_l]\}\equiv\mathbf K\equiv\langle\vec{x}\vec{x}^{T}\rangle$ обладает теми же свойствами симметричности и неотрицательной определённости. \textit{(Мальцев и др. [1], §4.1.)}
+	
+	\tquastion{12. Основные свойства гауссовских процессов. Выражение $n$-мерных моментных функций через ковариационную.}
+	
+	Гауссов процесс полностью описывается средним значением $m_x(t_k)$ и ковариационной функцией $B_x[t_1,t_2]$. Для гауссовских процессов некоррелированность значений тождественна статистической независимости. Линейное преобразование гауссовского процесса даёт гауссовский процесс; линейная комбинация совместно гауссовских процессов также гауссовская; условные плотности вероятности гауссовского процесса имеют гауссову форму.
+	
+	Формулы моментных функций ниже в методичке записаны для гауссовского процесса с нулевым средним $\langle x(t)\rangle=0$. Второй момент:
+	\[
+	\boxed{\alpha_2(t_1,t_2)=B_x[t_1,t_2].}\tag{4.2.11}
+	\]
+	Четвёртый момент:
+	\[
+	\boxed{\begin{aligned}
+			\alpha_4(t_1,t_2,t_3,t_4)&=B_x[t_1,t_2]B_x[t_3,t_4]+
+			B_x[t_1,t_3]B_x[t_2,t_4]+\\
+			&\quad+B_x[t_1,t_4]B_x[t_2,t_3]=
+			3\{B_x[t_1,t_2]B_x[t_3,t_4]\}_s.
+	\end{aligned}}\tag{4.2.12}
+	\]
+	Шестой и общий чётный моменты:
+	\[
+	\boxed{\alpha_6(t_1,t_2,t_3,t_4,t_5,t_6)=
+		15\{B_x[t_1,t_2]B_x[t_3,t_4]B_x[t_5,t_6]\}_s.}\tag{4.2.13}
+	\]
+	\[
+	\boxed{\alpha_{2m}(t_1,t_2,\dots,t_{2m})=
+		(2m-1)!!\{B_x[t_1,t_2]\cdot B_x[t_3,t_4]\cdot\dots\cdot
+		B_x[t_{2m-1},t_{2m}]\}_s.}\tag{4.2.14}
+	\]
+	Нечётные моментные функции:
+	\[
+	\boxed{\alpha_{2m+1}(t_1,t_2,\dots,t_{2m+1})=0.}\tag{4.2.15}
+	\]
+	Здесь $\{\cdot\}_s$ --- скобки симметризации, $(2m-1)!!=1\cdot3\cdot\ldots\cdot(2m-1)$. Для ненулевого среднего сначала центрируют процесс; приведённые формулы в источнике сформулированы именно для нулевого среднего. \textit{(Мальцев и др. [1], §4.2.)}
+	
+	\tquastion{13. Стационарные процессы. Стационарность в узком и широком смысле, их взаимоотношение.}
+	
+	\textbf{Стационарность в узком смысле:} все $n$-мерные плотности вероятности инвариантны относительно общего сдвига времени:
+	\[
+	\boxed{W(x_1,t_1,\dots,x_n,t_n)=
+		W(x_1,t_1+\tau,\dots,x_n,t_n+\tau).}\tag{5.1.1}
+	\]
+	Отсюда следуют постоянство одномерной плотности, среднего и дисперсии; двухвременные функции зависят только от $\tau=t_2-t_1$.
+	
+	\textbf{Стационарность в широком смысле:} среднее и дисперсия не зависят от времени, а корреляционная функция зависит только от разности времён:
+	\[
+	\boxed{\begin{cases}
+			\langle x(t)\rangle=m_x=\text{const}\\
+			\sigma_x^2(t)=\sigma_x^2=\text{const}\\
+			K_x[t_1,t_2]=K_x[t_2-t_1]=K_x[\tau]
+	\end{cases}}\tag{5.2.0}
+	\]
+	Из стационарности в узком смысле следует стационарность в широком, но не наоборот. Для гауссовских процессов эти понятия совпадают, поскольку конечномерные плотности полностью определяются средним и ковариационной функцией. \textit{(Мальцев и др. [1], §§5.1--5.2.)}
+	
+	\tquastion{14. Стационарность квазидетерминированных процессов (примеры).}
+	\small
+	\textbf{Пример 1.} $x(t)=A_0\cos(\omega_0t+\varphi)$, где начальная фаза $\varphi$ равномерно распределена на $[-\pi,\pi]$. Для среднего значения:
+	\[
+	\boxed{\begin{aligned}
+			\langle x(t) \rangle &= A_0 \langle \cos(\omega_0 t + \varphi) \rangle = A_0 \langle \cos \omega_0 t \cos \varphi - \sin \omega_0 t \sin \varphi \rangle = \\
+			&= A_0 [\cos \omega_0 t \langle \cos \varphi \rangle - \sin \omega_0 t \langle \sin \varphi \rangle]
+	\end{aligned}}\tag{5.2.1}
+	\]
+	При равномерной фазе $\langle\cos\varphi\rangle=\langle\sin\varphi\rangle=0$, поэтому среднее постоянно и равно нулю. Корреляционная функция:
+	\[
+	\boxed{\begin{aligned}
+			K_x[t_1, t_2] &= \langle x(t_1) x(t_2) \rangle = \langle A_0^2 \cos(\omega_0 t_1 + \varphi) \cos(\omega_0 t_2 + \varphi) \rangle = \\
+			&= \langle A_0^2 \cos(\omega_0 t_1 + \varphi) \cos(\omega_0 t_1 + \omega_0 \tau + \varphi) \rangle = \\
+			&= \frac{A_0^2}{2} [\langle \cos(2\omega_0 t_1 + \omega_0 \tau + 2\varphi) \rangle + \langle \cos(\omega_0 \tau) \rangle] = \frac{A_0^2}{2} \cos(\omega_0 \tau)
+	\end{aligned}}\tag{5.2.4}
+	\]
+	Корреляционная функция зависит только от $\tau=t_2-t_1$; при равномерной фазе процесс стационарен также в узком смысле.
+	
+	\textbf{Пример 2.} $x(t)=s(t+\tau_0)$, где $s(t)$ --- периодическая функция периода $T$, а $\tau_0$ равномерно распределена на $[0,T]$:
+	\[
+	\boxed{W(\tau_0)=\begin{cases}
+			\dfrac{1}{T},&0\leq\tau_0\leq T,\\
+			0,&\tau_0<0,\;\tau_0>T.
+	\end{cases}}\tag{5.2.5}
+	\]
+	Среднее и корреляционная функция имеют вид:
+	\[
+	\boxed{\begin{aligned}
+			\langle x(t)\rangle&=\langle s(t+\tau_0)\rangle=
+			\int_0^T s(t+\tau_0)\frac{1}{T}\,d\tau_0=\\
+			&=\frac{1}{T}\int_t^{t+T}s(u)\,du=
+			\frac{1}{T}\int_0^T s(u)\,du=m_x=\text{const}.
+	\end{aligned}}
+	\]
+	\[
+	\boxed{\begin{aligned}
+			K_x[t,t+\tau]&=\langle x(t)x(t+\tau)\rangle=
+		\frac{1}{T}\int_0^T s(t+\tau_0)s(t+\tau_0+\tau)\,d\tau_0=\\
+			&=\frac{1}{T}\int_t^{t+T}s(u)s(u+\tau)\,du=
+			\frac{1}{T}\int_0^T s(u)s(u+\tau)\,du=K_x[\tau].
+	\end{aligned}}
+	\]
+	Значит, процесс стационарен в широком смысле. В общем случае периодическая функция со случайным равномерным сдвигом по периоду порождает стационарный в широком смысле процесс. \textit{(Мальцев и др. [1], §5.2.)}
+	\normalsize
+	
+	\tquastion{15. Эргодичность. Необходимые и достаточные условия эргодичности по среднему.}
+	
+	Процесс эргодичен по отношению к среднему, если среднее по времени одной реализации при $T\to\infty$ сходится к среднему по ансамблю. Среднеинтегральная оценка по реализации $k$:
+	\[
+	\boxed{\bar{x}_k^T=\lim_{T\to\infty}\frac{1}{T}\int_0^T x_k(t)\,dt.}\tag{5.3.2}
+	\]
+	Эргодичность означает $\bar{x}^T\to\langle x\rangle=m_x$ (в методичке рассматривается сходимость в среднеквадратическом смысле). Дисперсия временного среднего:
+	\[
+	\boxed{\begin{aligned}
+			\sigma_{\bar{x}^T}^2 &= \frac{1}{T^2} \iint_{\Delta} B_x[\tau]\,dt_0\,d\tau = \frac{1}{T^2} \int_{-T}^{T} B_x[\tau] \int_{-T+|\tau|}^{T-|\tau|} dt_0\,d\tau = \\
+			&= \frac{1}{T^2} \int_{-T}^{T} (T - |\tau|) \cdot B_x[\tau]d\tau = \frac{1}{T} \int_{-T}^{T} \left(1 - \frac{|\tau|}{T}\right) \cdot B_x[\tau]d\tau
+	\end{aligned}}\tag{5.3.10}
+	\]
+	\[
+	\boxed{\sigma_{\bar{x}^T}^2 = \frac{1}{T} \int_{-T}^{T} \left(1 - \frac{|\tau|}{T}\right) B_x[\tau]d\tau = \frac{2}{T} \int_0^T \left(1 - \frac{|\tau|}{T}\right) B_x[\tau]d\tau.}\tag{5.3.11}
+	\]
+	Необходимое и достаточное условие эргодичности по среднему в среднем квадратичном:
+	\[
+	\boxed{\lim_{T\to\infty}\frac{1}{T}\int_0^T
+		\left(1-\frac{\tau}{T}\right)B_x[\tau]d\tau=0.}\tag{5.3.12}
+	\]
+	Достаточное условие Слуцкого и более сильное условие:
+	\[
+	\boxed{\lim_{T\to\infty}\frac{1}{T}\int_0^T B_x[\tau]d\tau=0,}\tag{5.3.13}
+	\]
+	\[
+	\boxed{\lim_{\tau\to\infty}B_x[\tau]=0.}\tag{5.3.14}
+	\]
+	\textit{(Мальцев и др. [1], §5.3.)}
+	
+	\tquastion{16. Пример стационарного, но не эргодического процесса (с доказательством).}
+	
+	В методичке рассматривается $x(t)=\xi(t)+A$, где $\xi(t)$ --- стационарный эргодический процесс с нулевым средним, $A$ --- случайная величина с нулевым средним, статистически независимая от $\xi(t)$ и постоянная во времени. Среднее равно нулю, а ковариационная функция:
+	\[
+	\boxed{\begin{aligned}
+			B_x[\tau]&=K_x[\tau]=\langle x(t)\cdot x(t+\tau)\rangle=\\
+			&=\langle\xi(t)\cdot\xi(t+\tau)\rangle+\\
+			&\quad+\langle A^2\rangle+\langle\xi(t)\cdot A\rangle+
+			\langle\xi(t+\tau)\cdot A\rangle.
+	\end{aligned}}\tag{5.3.15}
+	\]
+	В силу независимости последние два слагаемых равны нулю, поэтому
+	\[
+	\boxed{B_x[\tau]=B_{\xi}[\tau]+\langle A^2\rangle.}\tag{5.3.16}
+	\]
+	Процесс стационарен в широком смысле. Однако условие (5.3.12) не выполняется:
+	\begin{align} \tag{5.3.17}
+		\boxed{\lim_{T\to\infty}\left\{
+			\frac{1}{T}\int_0^T\left(1-\frac{\tau}{T}\right)B_{\xi}[\tau]d\tau+
+			\frac{1}{T}\int_0^T\left(1-\frac{\tau}{T}\right)\langle A^2\rangle d\tau
+			\right\}=\frac{\langle A^2\rangle}{2}.}
+	\end{align}
+	Значит, при $\langle A^2\rangle\neq0$ процесс не эргодичен по среднему. Частный случай из методички: $A=\pm A_0$ с одинаковыми вероятностями; две части ансамбля имеют разные временные средние:
+	\[
+	\boxed{\lim_{T\to\infty}\bar{x}_1^T=
+		\lim_{T\to\infty}\frac{1}{T}\int_0^T x_1(t)dt=A_0,}\qquad
+	\boxed{\lim_{T\to\infty}\bar{x}_2^T=
+		\lim_{T\to\infty}\frac{1}{T}\int_0^T x_2(t)dt=-A_0.}
+	\]
+	Ансамблевое среднее равно нулю, но временное среднее зависит от выбранного подансамбля. \textit{(Мальцев и др. [1], §5.3.)}
+	
+	\tquastion{17. Необходимые и достаточные условия эргодичности по корреляционной функции.}
+	\small
+	Для стационарного процесса корреляционная функция и её временная оценка:
+	\[
+	\boxed{K_x[\tau]\equiv\langle x(t)x(t+\tau)\rangle.}\tag{5.3.18}
+	\]
+	\[
+	\boxed{K_x^T[\tau]\equiv\frac{1}{T}\int_0^T x(t)x(t+\tau)dt.}\tag{5.3.19}
+	\]
+	Эргодичность по корреляционной функции означает совпадение временной оценки с ансамблевым средним:
+	\[
+	\boxed{\lim_{T\to\infty}K_x^T[\tau]=
+		\lim_{T\to\infty}\frac{1}{T}\int_0^T x(t)x(t+\tau)dt=K_x[\tau].}\tag{5.3.20}
+	\]
+	Введём вспомогательный процесс $y(t)=x(t)x(t+\tau)$. Необходимое и достаточное условие эргодичности его среднего, а значит, и эргодичности исходного процесса по корреляционной функции:
+	\[
+	\boxed{\lim_{T\to\infty}\frac{1}{T}\int_0^T
+		\left(1-\frac{\tau'}{T}\right)B_y[\tau']d\tau'=0.}\tag{5.3.21}
+	\]
+	Здесь ковариационная функция вспомогательного процесса равна
+	\[
+	\boxed{\begin{aligned}
+			B_y[\tau'] &\equiv \langle y(t) \cdot y(t+\tau') \rangle - \langle y(t) \rangle \langle y(t+\tau') \rangle = \\
+			&= \langle x(t)x(t+\tau)x(t+\tau')x(t+\tau+\tau') \rangle - \\
+			&\quad - \langle x(t)x(t+\tau) \rangle \langle x(t+\tau')x(t+\tau+\tau') \rangle = \\
+			&= \alpha_4^{(x)}(0,\tau,\tau',\tau+\tau')-K_x^2[\tau]
+	\end{aligned}}\tag{5.3.22}
+	\]
+	Достаточное условие:
+	\[
+	\boxed{B_y[\tau']=\alpha_4^{(x)}(0,\tau,\tau',\tau+\tau')-K_x^2[\tau]
+		\xrightarrow[\tau'\to\infty]{}0.}\tag{5.3.23}
+	\]
+	Следовательно, для проверки общего критерия требуется исследовать четвёртую моментную функцию. \textit{(Мальцев и др. [1], §5.3.)}
+	\normalsize
+	
+	\tquastion{18. Достаточное условие эргодичности по одномерной плотности вероятности. Экспериментальное определение.}
+	\small
+	Введём вспомогательный процесс $y(t)=\delta[x-x(t)]$. По свойству дельта-функции:
+	\[
+	\boxed{\langle\delta[x-x(t)]\rangle=
+		\int_{-\infty}^{\infty}\delta[x-x']W(x',t)dx'=W(x,t).}\tag{5.3.29}
+	\]
+	Эргодичность по одномерной плотности сводится к эргодичности среднего вспомогательного процесса. Необходимое и достаточное условие:
+	\[
+	\boxed{\lim_{T\to\infty}\frac{1}{T}\int_0^T
+		\left(1-\frac{\tau'}{T}\right)B_y[\tau']d\tau'=0.}\tag{5.3.31}
+	\]
+	Ковариационная функция $y(t)$:
+	\[
+	\boxed{\begin{aligned}
+			B_y[\tau']&=\langle y(t)y(t+\tau')\rangle-
+			\langle y(t)\rangle\langle y(t+\tau')\rangle=\\
+			&=\langle\delta[x-x(t)]\delta[x-x(t+\tau')]\rangle-\\
+			&\quad-\langle\delta[x-x(t)]\rangle\langle\delta[x-x(t+\tau')]\rangle=\\
+			&=W(x,t;x,t+\tau')-W(x,t)W(x,t+\tau').
+	\end{aligned}}\tag{5.3.32}
+	\]
+	Достаточное условие эргодичности --- стремление этой ковариации к нулю при $\tau'\to\infty$. С учётом стационарности:
+	\[
+	\boxed{W(x_1,t;x_2,t+\tau')\xrightarrow[\tau'\to\infty]{}
+		W(x_1,t)W(x_2,t+\tau')=W(x_1)W(x_2).}\tag{5.3.34}
+	\]
+	Иными словами, достаточно, чтобы далеко разнесённые отсчёты были статистически независимы.
+	
+	\textbf{Экспериментальное определение.} Вместо ансамблевого усреднения измеряют долю времени $T_{\Delta x}/T$, в течение которого реализация попадает в малую окрестность выбранного значения $x$. Тогда:
+	\[
+	\boxed{W'(x)\Delta x=\lim_{T\to\infty}\frac{T_{\Delta x}}{T}=W(x)\Delta x.}\tag{5.4.3}
+	\]
+	Здесь $T_{\Delta x}$ --- суммарное время пребывания реализации в выбранном малом окне. \textit{(Мальцев и др. [1], §§5.3--5.4.)}
+	\normalsize
+	
+	\tquastion{19. Совокупность двух случайных процессов. Статистическая независимость. Взаимные корреляционная и ковариационная функции.}
+	
+	Совокупность $\{x(t),y(t)\}$ полностью описывается совместной $(n+n')$-мерной плотностью. В методичке она определяется следующим образом:
+	\[
+	\boxed{\begin{aligned}
+			W_{xy}(x_1,t_1;\dots;x_n,t_n;y_1,t_1';\dots;y_{n'},t_{n'}')&=\\
+			&=P\left\{\begin{array}{l}
+				x_i\leq x(t_i)\leq x_i+dx\\
+				y_k\leq y(t_k')\leq y_k+dy
+			\end{array}\right\},\quad i=1,2,\dots,n.
+	\end{aligned}}\tag{6.1.1}
+	\]
+	Процессы статистически независимы, если совместная плотность распадается на произведение плотностей каждого процесса:
+	\[
+	\boxed{\begin{aligned}
+			W_{xy}(x_1,t_1;\dots;x_n,t_n;y_1,t_1';\dots;y_{n'},t_{n'}')&=\\
+			&=W_x(x_1,t_1;\dots;x_n,t_n)
+			W_y(y_1,t_1';\dots;y_{n'},t_{n'}').
+	\end{aligned}}\tag{6.1.3}
+	\]
+	Взаимная корреляционная функция --- смешанный момент второго порядка:
+	\[
+	\boxed{\alpha_{1,1}^{x,y}(t_1,t_2)=
+		\langle x(t_1)y(t_2)\rangle=K_{xy}[t_1,t_2].}\tag{6.2.5}
+	\]
+	Взаимная ковариационная функция:
+	\[
+	\boxed{B_{xy}[t_1,t_2]=\langle x(t_1)y(t_2)\rangle-
+		\langle x(t_1)\rangle\langle y(t_2)\rangle=
+		K_{xy}[t_1,t_2]-m_x(t_1)m_y(t_2).}\tag{6.2.6}
+	\]
+	Взаимный коэффициент корреляции:
+	\[
+	\boxed{R_{xy}[t_1,t_2]=
+		\frac{B_{xy}[t_1,t_2]}{\sigma_x(t_1)\sigma_y(t_2)}=
+		\frac{B_{xy}[t_1,t_2]}{\sqrt{B_x[t_1,t_1]B_y[t_2,t_2]}}.}\tag{6.2.7}
+	\]
+	Симметрия взаимной корреляции:
+	\[
+	\boxed{K_{xy}[t_1,t_2]=\langle x(t_1)y(t_2)\rangle=
+		\langle y(t_2)x(t_1)\rangle=K_{yx}[t_2,t_1].}\tag{6.2.8}
+	\]
+	Независимость процессов влечёт их взаимную некоррелированность, но обратное в общем случае неверно. \textit{(Мальцев и др. [1], §§6.1--6.2.)}
+	
+	\tquastion{20. Понятия стационарности, эргодичности, гауссовости совокупности двух процессов.}
+	\small
+	Совокупность $\{x(t),y(t)\}$ стационарна в узком смысле, если её совместная плотность любого порядка инвариантна к общему сдвигу времени. Стационарность в широком смысле требует постоянства средних и зависимости автокорреляционных и взаимной корреляционной функций только от разности времён:
+	\[
+	\boxed{\begin{aligned}
+			m_x(t)&=\text{const};\quad K_x[t_1,t_2]=K_x[t_2-t_1]=K_x[\tau];\\
+			m_y(t)&=\text{const};\quad K_y[t_1,t_2]=K_y[t_2-t_1]=K_y[\tau];\\
+			K_{xy}[t_1,t_2]&=K_{xy}[t_2-t_1]=K_{xy}[\tau].
+	\end{aligned}}\tag{6.2.11}
+	\]
+	Для взаимных корреляционных функций:
+	\[
+	\boxed{\begin{aligned}
+			K_{xy}[\tau] &= K_{xy}[t, t+\tau] = \langle x(t)y(t+\tau) \rangle = \langle x(t+\tau-\tau)y(t+\tau) \rangle = \\
+			&= \langle y(t+\tau)x(t+\tau-\tau) \rangle = K_{yx}[(t+\tau),(t+\tau)-\tau] = K_{yx}[-\tau].
+	\end{aligned}}\tag{6.2.13}
+	\]
+	Стационарность процессов по отдельности не гарантирует стационарности совокупности. В методичке приведён пример:
+	\[
+	\boxed{\begin{aligned}
+			x(t)&=\xi(t)\cos\omega_0t+\eta(t)\sin\omega_0t,\\
+			y(t)&=\xi(t)\sin\omega_0t+\eta(t)\cos\omega_0t.
+	\end{aligned}}\tag{6.2.13}
+	\]
+	При условиях методички взаимная корреляционная функция равна:
+	\[
+	\boxed{\begin{aligned}
+			K_{xy}[t, t+\tau] &= \langle x(t)y(t+\tau) \rangle = \langle \xi(t) \xi(t+\tau) \rangle \cos \omega_0 t \sin[\omega_0(t+\tau)] + \\
+			&\quad + \langle \eta(t)\eta(t+\tau) \rangle \sin \omega_0 t \cos[\omega_0(t+\tau)] + \\
+			&\quad + \langle \xi(t)\eta(t+\tau) \rangle \cos \omega_0 t \sin[\omega_0(t+\tau)] + \\
+			&\quad + \langle \eta(t)\xi(t+\tau) \rangle \sin \omega_0 t \sin[\omega_0(t+\tau)] = \\
+			&= K[\tau] \cos \omega_0 t \sin[\omega_0(t+\tau)] + K[\tau] \sin \omega_0 t \cos[\omega_0(t+\tau)] + 0 + 0 = \\
+			&= K[\tau] \sin(2\omega_0 t + \omega_0 \tau)
+	\end{aligned}}\tag{6.2.17}
+	\]
+	Она зависит от абсолютного времени $t$, поэтому совокупность нестационарна.
+	
+	Эргодичность совокупности понимается по аналогии с одним процессом: временные оценки статистических характеристик пары должны совпадать с ансамблевыми. Отдельного критерия для двух процессов методичка не приводит.
+	
+	Совокупность гауссова, если процессы имеют совместное гауссово распределение. Гауссовость каждого процесса по отдельности не гарантирует гауссовости совокупности. Если процессы статистически независимы и каждый имеет гауссову плотность вероятности, их совместная плотность также гауссова. \textit{(Мальцев и др. [1], §6.2.)}
+	\normalsize	
+\end{document}
