@@ -1,16 +1,23 @@
 \documentclass[a4paper, landscape]{article}
 \usepackage{pdfpages}
+\usepackage{geometry}
 
 
 \begin{document}
+	\newgeometry{
+		top=0mm,
+		right=4mm,
+		left=4mm,
+		bottom=0mm
+	}
 	% nup=2x2 — 2 столбца, 2 строки (4 страницы на лист)
 	% delta=5mm 5mm — промежутки между страницами
 	% frame=true — рамка вокруг каждой страницы (удобно для резки)
 	\includepdf[
-	pages=3-last,
-	nup=6x4,
+	pages=4-last,
+	nup=5x3,
 	delta=0mm 0mm,
 	frame=true,
-	scale=0.97
+	scale=1
 	]{answers_max.pdf}
 \end{document}

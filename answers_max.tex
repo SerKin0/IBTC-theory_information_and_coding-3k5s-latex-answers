@@ -4,13 +4,13 @@
 
 \geometry{
 	a4paper,
-	paperheight=140mm,
-	paperwidth=140mm,
-	left=0.5cm,
-	right=0.5cm,
-	top=0.5cm,
-	bottom=0.5cm,
-	footskip=0.8cm
+	paperheight=16cm,
+	paperwidth=14cm,
+	left=0.3cm,
+	right=0.3cm,
+	top=0.3cm,
+	bottom=2.3cm,
+	footskip=2.8cm
 }
 
 \usepackage{graphicx}
@@ -60,7 +60,12 @@
 \SetWatermarkColor[gray]{0.95}
 \SetWatermarkScale{1}
 
-\def\tquastion#1{\newpage\addcontentsline{toc}{subsection}{#1}\begin{librarybox}#1 \end{librarybox}}
+\def\tquastion#1{%
+	\newpage
+	\phantomsection % Создать якорь для hyperref
+	\addcontentsline{toc}{subsection}{#1}%
+	\begin{librarybox}#1\end{librarybox}%
+}
 
 \begin{document}
 	\emergencystretch=3em
@@ -73,7 +78,7 @@
 	Ответы на вопросы составлены преимущественно по учебно-методическим материалам А.А. Мальцева и соавторов. Студенческие конспекты использованы как дополнительные материалы для сверки. Формулы из источников сохранены в исходной записи и обозначениях; рамкой отмечены основные соотношения.
 	
 	\medskip
-	\noindent\textit{Обозначения по методичке:} $j^2=-1$; $W$ --- плотность вероятности; $\langle\cdot\rangle$ --- усреднение по статистическому ансамблю; $K_x$ --- корреляционная (нецентрированная) функция; $B_x$ --- ковариационная (центрированная) функция; $\delta$ --- дельта-функция Дирака.
+	Благодарность в помощи составления ответов выражается Помелову Сергею Дмитриевичу.
 	
 	\tableofcontents
 	
