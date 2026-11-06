@@ -80,8 +80,9 @@
 	\tquastion{1. Интегральная и дифференциальная функция распределения случайной величины.}
 	
 	
-	\[\boxed{\begin{gathered}F(x)=P\{X<x\}=\int_{-\infty}^{x}W(x')\,dx',\\[2pt]W(x)=F'(x)\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Функции распределения}}\\[3pt]F(x)=P\{X<x\}=\int_{-\infty}^{x}W(x')\,dx',\\[2pt]W(x)=F'(x)\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $X$ --- случайная величина; $x$ --- пороговое значение; $F(x)$ --- вероятность события $X<x$; $W(x)$ --- плотность вероятности; $x'$ --- переменная интегрирования.\par\smallskip
 	Интегральная функция распределения $F(x)$ задаёт вероятность того, что случайная величина $X$ меньше $x$, а дифференциальная функция распределения $W(x)$ является её производной:
 	\[
 	F(x)=P\{X<x\}=\int_{-\infty}^{x}W(x')\,dx',
@@ -100,8 +101,9 @@
 	\tquastion{2. Стационарность случайного процесса в узком и широком смысле.}
 	
 	
-	\[\boxed{\begin{gathered}W_n(\mathbf x,\mathbf t)=W_n(\mathbf x,\mathbf t+\tau),\\[2pt]\langle x(t)\rangle=m_x=\mathrm{const},\quad K_x(t_1,t_2)=K_x(t_2-t_1)\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Стационарность случайного процесса}}\\[3pt]W_n(x,t)=W_n(x,t+\tau),\\[2pt]\langle x(t)\rangle=m_x=\mathrm{const},\quad K_x(t_1,t_2)=K_x(t_2-t_1)\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $W_n$ --- совместная плотность $n$ значений процесса; $x=(x_1,\ldots,x_n)$ --- набор значений процесса; $t=(t_1,\ldots,t_n)$ --- набор моментов времени; $\tau$ --- общий временной сдвиг; $m_x$ --- среднее; $K_x$ --- корреляционная функция.\par\smallskip
 	\textbf{Стационарность в узком смысле:} все конечномерные плотности вероятности не меняются при общем сдвиге всех моментов времени на одну и ту же величину $\tau$:
 	\[
 	W(x_1,t_1;\ldots;x_n,t_n)
@@ -118,8 +120,9 @@
 	\tquastion{3. $n$-мерная плотность через условные плотности: общий случай, марковский и совершенно случайный процессы.}
 	
 	
-	\[\boxed{\begin{gathered}W_n=W(x_1,t_1)\prod_{i=2}^{n}\\[-1pt]W(x_i,t_i\mid x_1,t_1;\ldots;x_{i-1},t_{i-1})\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Разложение совместной плотности}}\\[3pt]W_n=W(x_1,t_1)\prod_{i=2}^{n}\\[-1pt]W(x_i,t_i\mid x_1,t_1;\ldots;x_{i-1},t_{i-1})\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $W_n$ --- совместная плотность; $W(x_i,t_i)$ --- плотность значения $x_i$ в момент $t_i$; вертикальная черта $\mid$ означает условие; $i$ --- номер значения, $n$ --- их количество.\par\smallskip
 	В общем случае совместная плотность раскладывается через условные плотности:
 	\[
 	W_n=W(x_1,t_1)\prod_{i=2}^{n}
@@ -144,8 +147,9 @@
 	\tquastion{4. Поведение условной плотности при $\tau\to0$ и $\tau\to\infty$.}
 	
 	
-	\[\boxed{\begin{gathered}\displaystyle\lim_{\tau\to0}W(x_2,t_2\mid x_1,t_1)=\delta(x_2-x_1),\\[2pt]\displaystyle\lim_{\tau\to\infty}W(x_2,t_2\mid x_1,t_1)=W(x_2)\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Пределы условной плотности}}\\[3pt]\displaystyle\lim_{\tau\to0}W(x_2,t_2\mid x_1,t_1)=\delta(x_2-x_1),\\[2pt]\displaystyle\lim_{\tau\to\infty}W(x_2,t_2\mid x_1,t_1)=W(x_2)\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $\tau=t_2-t_1$ --- интервал времени; $W(x_2,t_2\mid x_1,t_1)$ --- условная плотность второго значения при заданном первом; $\delta$ --- дельта-функция Дирака; $W(x_2)$ --- безусловная плотность.\par\smallskip
 	Здесь $\tau=t_2-t_1$. При малом временном интервале процесс практически не успевает измениться, поэтому $x_2$ близко к $x_1$:
 	\[
 	\lim_{\tau\to0}W(x_2,t_2\mid x_1,t_1)=\delta(x_2-x_1).
@@ -159,8 +163,9 @@
 	\tquastion{5. Квазидетерминированный случайный процесс.}
 	
 	
-	\[\boxed{\begin{gathered}X(t)=S(t,\lambda),\qquad \lambda\text{ --- случайный параметр},\\[2pt]W(x,t)=\int W_\lambda(\lambda)\,\delta\bigl(x-S(t,\lambda)\bigr)\,d\lambda\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Квазидетерминированный процесс}}\\[3pt]X(t)=S(t,\lambda),\qquad \lambda\text{ --- случайный параметр},\\[2pt]W(x,t)=\int W_\lambda(\lambda)\,\delta\bigl(x-S(t,\lambda)\bigr)\,d\lambda\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $X(t)$ --- случайный процесс; $S(t,\lambda)$ --- заданная функция времени и параметра; $\lambda$ --- случайный параметр; $W_\lambda(\lambda)$ --- его плотность; $\delta$ --- дельта-функция Дирака.\par\smallskip
 	Квазидетерминированный процесс --- процесс, реализация которого имеет заданную функциональную форму, содержащую случайный параметр, не зависящий от времени:
 	\[
 	X(t)=S(t,\lambda),\qquad \lambda\text{ --- случайный параметр}.
@@ -178,34 +183,36 @@
 	\tquastion{6. $n$-мерная характеристическая функция и её связь с плотностью вероятностей.}
 	
 	
-	\[\boxed{\begin{gathered}\Theta_x(\mathbf u)=\int_{\mathbb R^n}W_n(\mathbf x)\\[-1pt]\exp\left(j\sum_{k=1}^{n}u_kx_k\right)d\mathbf x\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Характеристическая функция}}\\[3pt]\Theta_x(u_1,t_1;\ldots;u_n,t_n)=\\[-1pt]\int_{\mathbb R^n}W_n(x_1,t_1;\ldots;x_n,t_n)\\[-1pt]\exp\left(j\sum_{k=1}^{n}u_kx_k\right)dx_1\cdots dx_n\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $\Theta_x$ --- характеристическая функция; $u_1,\ldots,u_n$ --- сопряжённые переменные Фурье; $x_k$ --- значение процесса в момент $t_k$; $W_n$ --- совместная плотность; $j^2=-1$; $dx_1\cdots dx_n$ --- элемент объёма интегрирования.\par\smallskip
 	Характеристическая функция --- многомерное преобразование Фурье $n$-мерной плотности вероятности:
 	\[
 	\begin{aligned}
 		\Theta_x(u_1,t_1;\ldots;u_n,t_n)
-		&=\int_{\mathbb R^n}W_n
-		\exp\left(j\sum_{k=1}^{n}u_kx_k\right)\,d\mathbf{x}\\
+		&=\int_{\mathbb R^n}W_n(x_1,t_1;\ldots;x_n,t_n)
+		\exp\left(j\sum_{k=1}^{n}u_kx_k\right)\,dx_1\cdots dx_n\\
 		&=\left\langle\exp\left(j\sum_{k=1}^{n}u_kx(t_k)\right)\right\rangle.
 	\end{aligned}
 	\]
 	Обратное преобразование Фурье позволяет восстановить плотность:
 	\[
 	W_n=\frac{1}{(2\pi)^n}\int_{\mathbb R^n}
-	\Theta_x\exp\left(-j\sum_{k=1}^{n}u_kx_k\right)\,d\mathbf{u}.
+	\Theta_x\exp\left(-j\sum_{k=1}^{n}u_kx_k\right)\,du_1\cdots du_n.
 	\]
 	Следовательно, характеристическая функция и плотность задают одно и то же конечномерное распределение. Основные свойства:
 	\[
 	\Theta_x(0)=1,\qquad |\Theta_x|\le1,\qquad
-	\Theta_x(-\mathbf u)=\Theta_x^*(\mathbf u).
+	\Theta_x(-u_1,\ldots,-u_n)=\Theta_x^*(u_1,\ldots,u_n).
 	\]
 	Функции согласованы при уменьшении числа аргументов.
 	
 	\tquastion{7. Среднее значение, среднее функции и дисперсия случайного процесса.}
 	
 	
-	\[\boxed{\begin{gathered}\langle x(t)\rangle=\int xW(x,t)\,dx,\\[2pt]\sigma_x^2(t)=\langle x^2(t)\rangle-\langle x(t)\rangle^2\end{gathered}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Среднее значение и дисперсия}}\\[3pt]\langle x(t)\rangle=\int xW(x,t)\,dx,\\[2pt]\sigma_x^2(t)=\langle x^2(t)\rangle-\langle x(t)\rangle^2\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $\langle x(t)\rangle$ --- среднее значение; $W(x,t)$ --- плотность вероятности; $\sigma_x^2(t)$ --- дисперсия; $\langle x^2(t)\rangle$ --- второй начальный момент.\par\smallskip
 	Среднее значение процесса в фиксированный момент времени:
 	\[
 	\langle x(t)\rangle=\int_{-\infty}^{+\infty}xW(x,t)\,dx.
@@ -224,8 +231,9 @@
 	\tquastion{8. Моментные функции случайного процесса.}
 	
 	
-	\[\boxed{\alpha_s(t_1,\ldots,t_s)=\langle x(t_1)\cdots x(t_s)\rangle}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Моментная функция}}\\[3pt]\alpha_s(t_1,\ldots,t_s)=\langle x(t_1)\cdots x(t_s)\rangle\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $\alpha_s$ --- моментная функция порядка $s$; $s$ --- порядок момента; $t_1,\ldots,t_s$ --- выбранные моменты времени; $x(t_k)$ --- значение процесса в момент $t_k$; $\langle\cdot\rangle$ --- усреднение по ансамблю.\par\smallskip
 	Моментная функция $s$-го порядка --- среднее произведение значений процесса в $s$ произвольных (не обязательно различных) моментах времени:
 	\[
 	\alpha_s(t_1,\ldots,t_s)
@@ -234,7 +242,7 @@
 	Через $s$-мерную плотность:
 	\[
 	\alpha_s=\int_{\mathbb R^s}x_1\cdots x_s
-	W_s(x_1,t_1;\ldots;x_s,t_s)\,d\mathbf{x}.
+	W_s(x_1,t_1;\ldots;x_s,t_s)\,dx_1\cdots dx_s.
 	\]
 	Первые два порядка:
 	\[
@@ -246,21 +254,22 @@
 	\left.
 	\frac{\partial^s\Theta_x}
 	{\partial u_{k_1}\cdots\partial u_{k_s}}
-	\right|_{\mathbf u=0}
+	\right|_{u_1=\cdots=u_n=0}
 	=j^s\alpha_s(t_{k_1},\ldots,t_{k_s}).
 	\]
 	
 	\tquastion{9. Кумулянтные функции случайного процесса.}
 	
 	
-	\[\boxed{\varkappa_s=\left.\dfrac{1}{j^s}\dfrac{\partial^s\ln\Theta_x}{\partial u_{k_1}\cdots\partial u_{k_s}}\right|_{\mathbf u=0}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Кумулянтная функция}}\\[3pt]\varkappa_s=\left.\dfrac{1}{j^s}\dfrac{\partial^s\ln\Theta_x}{\partial u_{k_1}\cdots\partial u_{k_s}}\right|_{u_1=\cdots=u_n=0}\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $\varkappa_s$ --- кумулянтная функция порядка $s$; $\Theta_x$ --- характеристическая функция; $u_{k_1},\ldots,u_{k_s}$ --- переменные Фурье; $t_{k_1},\ldots,t_{k_s}$ --- соответствующие моменты времени; $j^2=-1$.\par\smallskip
 	Кумулянтная функция $s$-го порядка определяется через производную логарифма характеристической функции в нуле:
 	\[
 	\varkappa_s(t_{k_1},\ldots,t_{k_s})
 	=\left.\frac{1}{j^s}
 	\frac{\partial^s\ln\Theta_x}
-	{\partial u_{k_1}\cdots\partial u_{k_s}}\right|_{\mathbf u=0}.
+	{\partial u_{k_1}\cdots\partial u_{k_s}}\right|_{u_1=\cdots=u_n=0}.
 	\]
 	Разложение логарифма характеристической функции:
 	\[
@@ -280,8 +289,9 @@
 	\tquastion{10. Корреляционная и ковариационная функции случайного процесса.}
 	
 	
-	\[\boxed{B_x(t_1,t_2)=K_x(t_1,t_2)-m_x(t_1)m_x(t_2)}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Связь корреляционной и ковариационной функций}}\\[3pt]B_x(t_1,t_2)=K_x(t_1,t_2)-m_x(t_1)m_x(t_2)\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $K_x$ --- нецентрированная корреляционная функция; $B_x$ --- центрированная ковариационная функция; $m_x(t)$ --- среднее процесса в момент $t$; $t_1,t_2$ --- моменты времени.\par\smallskip
 	Корреляционная функция $K_x$ --- нецентрированный момент второго порядка:
 	\[
 	K_x(t_1,t_2)=\langle x(t_1)x(t_2)\rangle.
@@ -303,8 +313,9 @@
 	\tquastion{11. Коэффициент автокорреляции случайного процесса.}
 	
 	
-	\[\boxed{r_x(t_1,t_2)=\dfrac{B_x(t_1,t_2)}{\sigma_x(t_1)\sigma_x(t_2)}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Коэффициент автокорреляции}}\\[3pt]r_x(t_1,t_2)=\dfrac{B_x(t_1,t_2)}{\sigma_x(t_1)\sigma_x(t_2)}\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $r_x$ --- коэффициент автокорреляции; $B_x$ --- ковариационная функция; $\sigma_x(t)$ --- среднеквадратичное отклонение (корень из дисперсии); $t_1,t_2$ --- моменты времени; $\tau$ --- временной сдвиг.\par\smallskip
 	Коэффициент автокорреляции --- нормированная ковариационная функция:
 	\[
 	r_x(t_1,t_2)=
@@ -323,8 +334,9 @@
 	\tquastion{12. Коэффициент взаимной корреляции двух случайных процессов.}
 	
 	
-	\[\boxed{r_{xy}(t_1,t_2)=\dfrac{B_{xy}(t_1,t_2)}{\sigma_x(t_1)\sigma_y(t_2)}}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Коэффициент взаимной корреляции}}\\[3pt]r_{xy}(t_1,t_2)=\dfrac{B_{xy}(t_1,t_2)}{\sigma_x(t_1)\sigma_y(t_2)}\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $r_{xy}$ --- коэффициент взаимной корреляции; $B_{xy}$ --- взаимная ковариационная функция; $\sigma_x,\sigma_y$ --- среднеквадратичные отклонения процессов $x$ и $y$; $t_1,t_2$ --- моменты времени.\par\smallskip
 	Взаимная корреляционная функция:
 	\[
 	K_{xy}(t_1,t_2)=\langle x(t_1)y(t_2)\rangle.
@@ -348,8 +360,9 @@
 	\tquastion{13. Нахождение среднего и дисперсии по корреляционной функции для процессов с конечной памятью.}
 	
 	
-	\[\boxed{m_x^2=\lim_{\tau\to\infty}K_x(\tau),\qquad \sigma_x^2=K_x(0)-m_x^2}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Среднее и дисперсия через корреляционную функцию}}\\[3pt]m_x^2=\lim_{\tau\to\infty}K_x(\tau),\qquad \sigma_x^2=K_x(0)-m_x^2\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $m_x$ --- среднее значение процесса; $K_x(\tau)$ --- корреляционная функция при временном сдвиге $\tau$; $K_x(0)$ --- её значение при нулевом сдвиге; $\sigma_x^2$ --- дисперсия.\par\smallskip
 	Для физических процессов с конечной памятью
 	\[
 	K_x(\tau)\to m_x^2,\qquad B_x(\tau)\to0
@@ -365,8 +378,9 @@
 	\tquastion{14. Эргодичность случайного процесса по отношению к среднему.}
 	
 	
-	\[\boxed{\displaystyle\lim_{T\to\infty}\frac{1}{T}\int_0^T x(t)\,dt=\langle x\rangle}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Эргодичность по среднему}}\\[3pt]\displaystyle\lim_{T\to\infty}\frac{1}{T}\int_0^T x(t)\,dt=\langle x\rangle\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $T$ --- длительность усреднения; $x(t)$ --- одна реализация процесса; $t$ --- время; $\langle x\rangle$ --- ансамблевое среднее (математическое ожидание).\par\smallskip
 	Процесс эргодичен по отношению к среднему, если временное среднее по одной реализации при $T\to\infty$ стремится к ансамблевому среднему:
 	\[
 	\lim_{T\to\infty}\frac{1}{T}\int_0^T x(t)\,dt
@@ -388,8 +402,9 @@
 	\tquastion{15. Плотность вероятностей при безынерционном нелинейном преобразовании $y=f(x)$.}
 	
 	
-	\[\boxed{W_y(y)=\sum_i\dfrac{W_x(x_i)}{|f'(x_i)|},\qquad f(x_i)=y}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Плотность после нелинейного преобразования}}\\[3pt]W_y(y)=\sum_i\dfrac{W_x(x_i)}{|f'(x_i)|},\qquad f(x_i)=y\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $X$ --- входная случайная величина; $Y=f(X)$ --- результат преобразования; $W_x,W_y$ --- плотности входной и выходной величин; $x_i$ --- все корни уравнения $f(x_i)=y$; $f'(x_i)$ --- производная функции в корне.\par\smallskip
 	При безынерционном преобразовании $Y=f(X)$ плотность новой случайной величины находится из плотности $X$ с учётом производной обратной функции. Если обратная функция однозначна, то
 	\[
 	W_y(y)=W_x\bigl(f^{-1}(y)\bigr)
@@ -410,20 +425,21 @@
 	\tquastion{16. Гауссовский случайный процесс.}
 	
 	
-	\[\boxed{\Theta_x(\mathbf u)=\exp\left(j\mathbf m^T\mathbf u-\frac12\mathbf u^T\mathbf B\mathbf u\right)}\]
+	\[\boxed{\begin{gathered}\text{\scriptsize\textbf{Характеристическая функция гауссовского процесса}}\\[3pt]\Theta_x(u_1,\ldots,u_n)=\\[-1pt]\exp\left(j\sum_{k=1}^{n}m_ku_k-\frac12\sum_{k=1}^{n}\sum_{l=1}^{n}B_{kl}u_ku_l\right)\end{gathered}}\]
 	\noindent\rule{\linewidth}{0.4pt}\par\smallskip
+	\noindent\textit{Обозначения:} $\Theta_x$ --- характеристическая функция; $u_k$ --- переменная Фурье; $m_k$ --- среднее значение в момент $t_k$; $B_{kl}$ --- элемент ковариационной матрицы; $j^2=-1$.\par\smallskip
 	Гауссовским называется случайный процесс, у которого любой конечный набор значений имеет совместное многомерное нормальное распределение. Характеристическая функция имеет вид
 	\[
-	\Theta_x(\mathbf u)=
-	\exp\left(j\mathbf m^T\mathbf u
-	-\frac12\mathbf u^T\mathbf B\mathbf u\right).
+	\Theta_x(u_1,\ldots,u_n)=
+	\exp\left(j\sum_{k=1}^{n}m_ku_k
+	-\frac12\sum_{k=1}^{n}\sum_{l=1}^{n}B_{kl}u_ku_l\right).
 	\]
-	Здесь $\mathbf m$ --- вектор средних значений, а $\mathbf B$ --- ковариационная матрица с элементами $B_{kl}=B_x(t_k,t_l)$. Для невырожденной ковариационной матрицы $n$-мерная плотность равна
+	Здесь $m_k=\langle x(t_k)\rangle$ --- среднее значение, а $B_{kl}=B_x(t_k,t_l)$ --- элементы ковариационной матрицы. Для невырожденной ковариационной матрицы $n$-мерная плотность равна
 	\[
-	W_n(\mathbf x)=
-	\frac{1}{(2\pi)^{n/2}\sqrt{\det\mathbf B}}
-	\exp\left[-\frac12(\mathbf x-\mathbf m)^T
-	\mathbf B^{-1}(\mathbf x-\mathbf m)\right].
+	W_n(x_1,\ldots,x_n)=
+	\frac{1}{(2\pi)^{n/2}\sqrt{\det B}}
+	\exp\left[-\frac12\sum_{k=1}^{n}\sum_{l=1}^{n}
+	(x_k-m_k)(B^{-1})_{kl}(x_l-m_l)\right].
 	\]
 	Формула плотности записана для невырожденной ковариационной матрицы. Гауссовский процесс полностью задаётся средним и ковариационной функцией; все кумулянтные функции порядка $s\ge3$ равны нулю.
 	
